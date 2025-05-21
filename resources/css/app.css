@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .table-border {
+        @apply border border-white/25 p-4 text-center text-sm;
+    }
+
+    .table-bottom-border {
+        @apply border-b border-white/25 p-4 text-center text-sm;
+    }
+
+    .win {
+        @apply text-green;
+    }
+
+    .lose {
+        @apply text-red-500;
+    }
+}
+
+body {
+    background-color: #2f2f2f;
+    font-family: "Poppins";
+    font-size: 0.875rem /* 14px */;
+    line-height: 1.25rem /* 20px */;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
