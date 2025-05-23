@@ -20,6 +20,7 @@ return new class extends Migration
             $table->decimal('amount')->default(0);
             $table->decimal('fee')->default(0);
             $table->string('note');
+            $table->string('reason_reject')->default("");
             $table->enum('status', ['success', 'pending', 'reject'])->default('pending');
             $table->timestamps();
         });

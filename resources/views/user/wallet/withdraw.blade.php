@@ -87,7 +87,8 @@
                                     <td class="table-border">Date</td>
                                     <td class="table-border">Amount</td>
                                     <td class="table-border">Fee</td>
-                                    <td class="table-border">Note</td>
+                                    <td class="table-border">Node</td>
+                                    <td class="table-border">Reason Rejected</td>
                                     <td class="table-border">Status</td>
                                 </tr>
                             </thead>
@@ -99,9 +100,20 @@
                                             <td class="table-border">@money($withdraw->amount)</td>
                                             <td class="table-border">@money($withdraw->fee)</td>
                                             <td class="table-border">{{ $withdraw->note }}</td>
+                                            <td class="table-border">{{ $withdraw->reason_reject }}</td>
                                             <td class="table-border">
+                                                @php
+                                                    $statusClass = match ($withdraw->status) {
+                                                        'success' => 'bg-green',
+                                                        'pending' => 'bg-orange',
+                                                        default => 'bg-red-500',
+                                                    };
+                                                @endphp
+
                                                 <button
-                                                    class="{{ $withdraw->status == 'success' ? 'bg-green' : 'bg-red-500' }} first-letter:uppercase px-2 py-1 rounded">{{ $withdraw->status }}</button>
+                                                    class="{{ $statusClass }} first-letter:uppercase px-2 py-1 rounded">
+                                                    {{ $withdraw->status }}
+                                                </button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -112,17 +124,6 @@
                                 @endif
                             </tbody>
                         </table>
-                    </div>
-                    <div class="flex justify-between text-sm">
-                        <div class="flex gap-2 items-center mb-4">
-                        </div>
-                        <div class="flex items-center gap-4 my-7">
-                            <a href="" class="block">Previous</a>
-                            <ul>
-                                <li class="w-7 h-7 flex justify-center items-center rounded bg-orange">1</li>
-                            </ul>
-                            <a href="" class="block">Next</a>
-                        </div>
                     </div>
                 </div>
             </div>

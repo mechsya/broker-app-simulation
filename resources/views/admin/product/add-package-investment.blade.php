@@ -107,19 +107,6 @@
                             </tbody>
                         </table>
                     </div>
-
-                    <div class="flex justify-between text-sm">
-                        <div class="flex gap-2 items-center mb-4">
-                            <p>Menampilkan 1 hingga 10 dari 13 entri</p>
-                        </div>
-                        <div class="flex items-center gap-4 my-7">
-                            <a href="" class="block">Sebelumnya</a>
-                            <ul>
-                                <li class="w-7 h-7 flex justify-center items-center  rounded bg-orange">1</li>
-                            </ul>
-                            <a href="" class="block">Berikutnya</a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

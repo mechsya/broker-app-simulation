@@ -6,24 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- Primary Meta Tags -->
-    <title>King Trade Investment</title>
+    <title>{{ env('APP_NAME') }}</title>
     <link rel="icon" type="image/png" href="{{ asset('') }}favicon.png">
-    <meta name="title" content="King Trade Investment" />
+    <meta name="title" content="{{ env('APP_NAME') }}" />
     <meta name="description"
         content="Discover top investment solutions with {{ env('APP_NAME') }}, a leading broker offering secure, fast, and easy trading services. Join now to start your investment journey with expert support and advanced technology" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://kingtradeinvestment.com/" />
-    <meta property="og:title" content="King Trade Investment" />
+    <meta property="og:url" content="{{ env('APP_URL') }}" />
+    <meta property="og:title" content="{{ env('APP_NAME') }}" />
     <meta property="og:description"
         content="Discover top investment solutions with {{ env('APP_NAME') }}, a leading broker offering secure, fast, and easy trading services. Join now to start your investment journey with expert support and advanced technology" />
     <meta property="og:image" content="{{ asset('') }}thumbnail.png" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://kingtradeinvestment.com/" />
-    <meta property="twitter:title" content="King Trade Investment" />
+    <meta property="twitter:url" content="{{ env('APP_URL') }}" />
+    <meta property="twitter:title" content="{{ env('APP_NAME') }}" />
     <meta property="twitter:description"
         content="Discover top investment solutions with {{ env('APP_NAME') }}, a leading broker offering secure, fast, and easy trading services. Join now to start your investment journey with expert support and advanced technology" />
     <meta property="twitter:image" content="{{ asset('') }}thumbnail.png" />

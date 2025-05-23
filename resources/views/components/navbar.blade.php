@@ -45,7 +45,8 @@
     </nav>
 
     <div class="bg-black rounded-lg mt-0 right-0 duration-300 absolute z-50 overflow-hidden"
-        x-bind:class="profile ? 'p-3' : 'h-0'">
+        style="margin:16px; border-width: .5px; border-color: rgba(255,255,255,.10);"
+        x-bind:class="profile ? 'p-3 block' : 'h-0 hidden'">
         <div class="flex gap-4 items-center border-b border-white/30 pb-4">
             <div class="bg-cover h-16 w-16 rounded-full bg-background"
                 style="background-image: url({{ asset('') }}storage/photo-profile/{{ $user->profile[0]->photoProfile }});">
@@ -82,20 +83,25 @@
     </div>
 
     <div class="bg-black rounded-lg mt-0 right-24 duration-300 absolute z-50 overflow-hidden"
-        x-bind:class="notification ? 'p-3' : 'h-0'">
+        style="margin:16px; border-width: .5px; border-color: rgba(255,255,255,.10);"
+        x-bind:class="notification ? 'block px-3' : 'h-0 hidden'">
         <div class="flex gap-4 items-center border-b border-white/30 py-4">
             <div class="text-white/70">
-                <p class="text-lg">Notification</p>
+                <p class="text-lg text-center">Notification</p>
             </div>
         </div>
         <div class="text-white/70">
             <ul>
-                @foreach ($notifications as $notification)
-                    <li class="flex py-3 px-2 gap-2 items-center">
-                        <i class="fa-solid fa-circle-exclamation"></i>
-                        <p>{{ $notification->header }}</p>
-                    </li>
-                @endforeach
+                @if (count($notifications) == 0)
+                    <p class="p-3">No notification yet</p>
+                @else
+                    @foreach ($notifications as $notification)
+                        <li class="flex py-3 px-2 gap-2 items-center">
+                            <i class="fa-solid fa-circle-exclamation"></i>
+                            <p>{{ $notification->header }}</p>
+                        </li>
+                    @endforeach
+                @endif
             </ul>
         </div>
     </div>

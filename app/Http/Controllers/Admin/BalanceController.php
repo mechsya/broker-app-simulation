@@ -71,7 +71,7 @@ class BalanceController extends Controller
             }
         }
 
-        $withdraw->update(['status' => $request->method]);
+        $withdraw->update(['status' => $request->method, 'reason_reject' => $request->reason_reject]);
 
         return back()->with('success', ucfirst($request->method) . ' success');
     }

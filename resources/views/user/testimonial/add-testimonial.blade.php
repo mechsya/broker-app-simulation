@@ -104,19 +104,6 @@
                             </tbody>
                         </table>
                     </div>
-
-                    <div class="flex justify-between text-sm">
-                        <div class="flex gap-2 items-center mb-4">
-                            <p>Showing 1 to 10 of 13 entries</p>
-                        </div>
-                        <div class="flex items-center gap-4 my-7">
-                            <a href="" class="block">Previous</a>
-                            <ul>
-                                <li class="w-7 h-7 flex justify-center items-center rounded bg-orange">1</li>
-                            </ul>
-                            <a href="" class="block">Next</a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
