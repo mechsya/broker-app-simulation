@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Tools\Export;
 use App\Http\Controllers\User\FundController;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\InvestmentController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\User\TestimonialController;
 use App\Http\Controllers\User\TradeController;
 use App\Http\Controllers\User\WalletController;
 use App\Http\Middleware\CheckSession;
+use App\Mail\WithdrawMail;
 use App\Models\Bank;
 use App\Models\File;
 use App\Models\News;
@@ -20,6 +22,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 // Referral route
@@ -154,17 +157,28 @@ Route::middleware(CheckSession::class)->group(function () {
     });
 });
 
-Route::get('link', function () {
+Route::post('export', [Export::class, 'export']);
+
+Route::get('send-email', function () {
+    Mail::raw('Ini email test', function ($message) {
+        $message->to('alinia.meysa@gmail.com')
+            ->subject('Test Email');
+    });
+});
+
+Route::get('link-storage', function () {
     $target = storage_path('/app/public/');
     $symlink = $_SERVER['DOCUMENT_ROOT'] . '/storage';
     symlink($target, $symlink);
 });
 
-Route::get('clear', function () {
+Route::get('clear-cache', function () {
     Artisan::call('view:clear');
     Artisan::call('cache:clear');
     Artisan::call('config:clear');
     Artisan::call('route:clear');
 });
+
+Route::get('send-email', function () {});
 
 require __DIR__ . "/admin.php";

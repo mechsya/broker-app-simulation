@@ -13,10 +13,9 @@
             </div>
 
             <div class="p-4 lg:p-6 overflow-x-scroll">
-                @include('components.print')
 
                 <div class="w-[900px] lg:w-auto">
-                    <table class="w-full table-border">
+                    <table id="container-table" class="w-full table-border">
                         <thead>
                             <tr class="table-border">
                                 <td class="table-border">Tanggal</td>
@@ -43,15 +42,11 @@
                                     </td>
                                     <td class="table-border">
                                         <div class="flex justify-evenly">
-                                            <form class="flex justify-center" method="POST"
-                                                action="{{ route('dashboard.balances.withdrawals.update', ['id' => $withdraw->id, 'method' => 'success']) }}">
-                                                @csrf
-                                                @method('PUT')
-                                                <button
-                                                    class="bg-green font-semibold h-10 w-10 rounded flex justify-center items-center">
-                                                    <i class="fa-solid fa-circle-check text-lg text-white"></i>
-                                                </button>
-                                            </form>
+                                            <button onclick="approveHandle(event)" data-id="{{ $withdraw->id }}"
+                                                class="bg-green font-semibold h-10 w-10 rounded flex justify-center items-center">
+                                                <i class="fa-solid fa-circle-check text-lg text-white"></i>
+                                            </button>
+
                                             <button onclick="rejectHandle(event)" data-id="{{ $withdraw->id }}"
                                                 class="font-semibold h-10 rounded w-10 bg-red-500 flex justify-center items-center">
                                                 <i class="fa-solid fa-x"></i>
@@ -68,6 +63,29 @@
     </section>
 
     <script>
+        function approveHandle(event) {
+            event.preventDefault();
+
+            const button = event.currentTarget;
+            const id = button.dataset.id;
+
+            Swal.fire({
+                title: 'Berikan Alasan Penerimaan',
+                html: `
+        <form id="reject-form" class="flex flex-col gap-4 justify-center" method="POST"
+            action="withdrawals/${id}/update/success">
+            @csrf
+            @method('PUT')
+            <textarea name="reason_reject" rows="4" placeholder="Tulis alasan Penerimaan..." class="w-full border rounded p-2"></textarea>
+            <button type="submit" class="font-semibold rounded py-2 px-4 text-white" style="background-color:green;">
+                Terima Permintaan
+            </button>
+        </form>
+    `,
+                showConfirmButton: false,
+            });
+        }
+
         function rejectHandle(event) {
             event.preventDefault();
 

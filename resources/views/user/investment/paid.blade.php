@@ -25,14 +25,14 @@
                         @include('components.input', [
                             'label' => 'Investment Amount',
                             'name' => 'amount',
-                            'value' => 'UEA ' . $package->amount . '.00',
+                            'value' => 'AED ' . $package->amount . '.00',
                         ])
 
                         @include('components.input', [
                             'label' => 'Profit',
                             'name' => 'profit',
                             'value' =>
-                                "$package->profit% ($package->estimasiProfit) UEA " .
+                                "$package->profit% ($package->estimasiProfit) AED " .
                                 ($package->profit / 100) * $package->amount .
                                 '.00',
                         ])
@@ -42,7 +42,7 @@
                             'name' => 'contract',
                             'value' =>
                                 $package->contract .
-                                " $package->estimasiProfit (UEA " .
+                                " $package->estimasiProfit (AED " .
                                 $package->contract * ($package->profit / 100) * $package->amount .
                                 '.00)',
                         ])
@@ -73,10 +73,8 @@
                 </div>
 
                 <div class="p-4 lg:p-6 overflow-x-scroll">
-                    @include('components.print')
-
                     <div class="w-[900px] lg:w-auto">
-                        <table class="w-full table-border">
+                        <table id="container-table" class="w-full table-border">
                             <thead>
                                 <tr class="table-border">
                                     <td class="table-border">Date</td>

@@ -17,11 +17,11 @@ Route::prefix('dashboard')->group(function () {
     Route::prefix('users')->controller(UserController::class)->group(function () {
         Route::get('', [UserController::class, 'index'])->name('dashboard.users');
         Route::get('{id}/view', [UserController::class, 'edit'])->name('dashboard.users.view');
-     
+
         Route::post('{id}/update/password', [UserController::class, 'updatePassword'])->name('dashboard.users.update-password');
-        
+
         Route::post('{id}/update', [UserController::class, 'updateData'])->name('dashboard.users.update-data');
-        
+
         Route::put('{id}/verification', [UserController::class, 'update'])->name('dashboard.users.update');
 
         Route::put('{id}/add-balance', [UserController::class, 'putBalance'])->name('dashboard.users.update.balance');

@@ -95,7 +95,7 @@
 
             <div class="p-4 lg:p-6 overflow-x-scroll">
                 <div class="w-[900px] lg:w-auto">
-                    <table class="w-full table-border">
+                    <table id="container-table" class="w-full table-border">
                         <thead>
                             <tr class="table-border">
                                 <td class="table-border">Tanggal</td>
@@ -170,7 +170,7 @@
             <div class="p-4 lg:p-6 overflow-x-scroll">
                 <div class="w-[900px] lg:w-auto">
 
-                    <table class="w-full table-border">
+                    <table id="container-table" class="w-full table-border">
                         <thead>
                             <tr class="table-border">
                                 <td class="table-border">Tanggal</td>
@@ -235,7 +235,7 @@
 
             <div class="p-4 lg:p-6 overflow-x-scroll">
                 <div class="w-[900px] lg:w-auto">
-                    <table class="w-full table-border">
+                    <table id="container-table" class="w-full table-border">
                         <thead>
                             <tr class="table-border">
                                 <td class="table-border">Foto</td>

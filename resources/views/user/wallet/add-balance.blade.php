@@ -16,7 +16,7 @@
                     @csrf
                     <div class="mb-4">
                         @include('components.input-icon', [
-                            'icon' => 'UEA',
+                            'icon' => 'AED',
                             'label' => 'Purchase Amount',
                             'name' => 'amount',
                         ])
@@ -25,22 +25,20 @@
                 </form>
                 <div class="bg-blue-500 text-sm mt-4 p-4 rounded-lg text-white">
                     <p><i class="bi bi-info-circle-fill"></i> Notice:</p>
-                    <p>Min UEA 10.00, Max UEA 150,000.00, Fee 0%.</p>
+                    <p>Min AED 10.00, Max AED 150,000.00, Fee 0%.</p>
                 </div>
             </div>
         </div>
 
-        <div class="w-full lg:w-[70%] rounded-lg overflow-hidden bg-black text-white/80">
+        <div class="w-full lg:w-[70%] rounded-lg overflow-hidden text-white/80">
             <div class="w-full rounded-lg overflow-hidden bg-black">
                 <div class="p-6 text-white/70 border-b border-white/25">
-                    <p>Balance [ Total Balance : @money($user->profile[0]->balance) ]</p>
+                    <p>Balance [ Total Balance : @money($user->profile->balance) ]</p>
                 </div>
 
                 <div class="p-4 lg:p-6 overflow-x-scroll">
-                    @include('components.print')
-
                     <div class="w-[900px] lg:w-auto">
-                        <table class="w-full table-border">
+                        <table id="container-table" class="w-full table-border">
                             <thead>
                                 <tr class="table-border">
                                     <td class="table-border">Date</td>
@@ -76,7 +74,7 @@
                                     @endforeach
                                 @else
                                     <tr class="table-border">
-                                        <td class="p-4">No data available in the table</td>
+                                        <td class="p-4" colspan="4">No data available in the table</td>
                                     </tr>
                                 @endif
                             </tbody>

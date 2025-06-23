@@ -31,7 +31,7 @@
                     <div class="w-full">
                         @include('components.input-icon', [
                             'name' => 'amount',
-                            'icon' => 'UEA',
+                            'icon' => 'AED',
                             'required' => true,
                         ])
                     </div>
@@ -71,7 +71,7 @@
             </div>
             <div class="p-4 lg:p-6 overflow-x-scroll">
                 <div class="w-[900px] lg:w-auto">
-                    <table class="w-full table-bottom-border">
+                    <table id="container-table" class="w-full table-bottom-border">
                         <thead>
                             <tr class="table-bottom-border">
                                 <td class="table-bottom-border">Date</td>
@@ -115,7 +115,7 @@
                                 @endforeach
                             @else
                                 <tr>
-                                    <td class="p-4">No data available in table</td>
+                                    <td class="p-4" colspan="8">No data available in table</td>
                                 </tr>
                             @endif
                         </tbody>

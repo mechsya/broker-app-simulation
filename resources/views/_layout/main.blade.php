@@ -40,6 +40,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('') }}build/assets/app-Oyx9ikx-.css">
     <link rel="manifest" href="{{ asset('') }}build/manifest.json">
+    <script defer src="{{ asset('') }}js/export.js"></script>
 </head>
 
 <body>

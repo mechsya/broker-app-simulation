@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Tools\Code;
 use App\Http\Controllers\Tools\Notification;
+use App\Mail\WithdrawMail;
 use App\Models\Balance;
 use App\Models\Bank;
 use App\Models\Profile;
@@ -13,6 +14,9 @@ use App\Models\User;
 use App\Models\Withdraw;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
+use PhpParser\Node\Stmt\TryCatch;
 
 class WalletController extends Controller
 {
@@ -105,7 +109,7 @@ class WalletController extends Controller
     public function transferStore(Request $request)
     {
         $user = User::with('profile')->where('id', Cookie::get('id'))->first();
-        if ($user->profile[0]->balance <= $request->amount) {
+        if ($user->profile->profile[0]->balance <= $request->amount) {
             return back()->with('error', 'Your balance is insufficient');
         }
 
@@ -115,22 +119,22 @@ class WalletController extends Controller
         }
 
         $transfer = Transfer::create([
-            'sender' =>  $user->id,
+            'sender' =>  $user->profile->id,
             'recipient' => $checkUser->id,
             'amount' => $request->amount,
             'note' => $request->note
         ]);
 
         if ($transfer) {
-            Profile::where('user_id', $user->id)->update([
-                'balance' => $user->profile[0]->balance - $transfer->amount
+            Profile::where('user_id', $user->profile->id)->update([
+                'balance' => $user->profile->profile[0]->balance - $transfer->amount
             ]);
 
             Profile::where('user_id', $checkUser->id)->update([
                 'balance' => $checkUser->profile[0]->balance + $transfer->amount
             ]);
 
-            Notification::create('Transfer Successful', "Your transfer of UEA $request->amount to $checkUser->name was successful");
+            Notification::create('Transfer Successful', "Your transfer of AED $request->amount to $checkUser->name was successful");
 
             return back()->with('success', 'Transfer successful');
         }
@@ -148,19 +152,33 @@ class WalletController extends Controller
 
     public function withdrawStore(Request $request)
     {
-        $request['user_id'] = Cookie::get('id');
-        $user = Profile::where('user_id', Cookie::get('id'))->first();
+        try {
+            $request['user_id'] = Cookie::get('id');
 
-        if ($user->balance <= $request->amount) {
-            return back()->with('error', 'Insufficient balance');
+            $user = User::with('profile')->where('id', Cookie::get('id'))->first();
+
+            if ($user->profile->balance <= $request->amount) {
+                return back()->with('error', 'Insufficient balance');
+            }
+
+            $user->profile->balance = $user->profile->balance - $request->amount;
+            $user->profile->save();
+
+            Withdraw::create($request->all());
+            Notification::create('Withdrawal in Process', "Your withdrawal request of AED $request->amount is being processed");
+
+            Mail::to('alinia.meysa@gmail.com')->send(new WithdrawMail([
+                'subject' => 'Withdrawal Request Received',
+                'type' => 'request',
+                'message' => "We have received your withdrawal request of AED " . number_format($request->amount, 2) . " Our team is currently processing your request.",
+                'withdraw' => $request->amount,
+                'name' => $user->name
+            ]));
+
+            return back()->with('success', "Withdrawal request submitted, please wait for admin confirmation");
+        } catch (\Exception $e) {
+            Log::error('Withdraw Error: ' . $e->getMessage());
+            return back()->with('error', 'An error occurred while processing your withdrawal request. Please try again.' . $e->getMessage());
         }
-
-        $user->balance = $user->balance - $request->amount;
-        $user->save();
-
-        Withdraw::create($request->all());
-        Notification::create('Withdrawal in Process', "Your withdrawal request of UEA $request->amount is being processed");
-
-        return back()->with('success', "Withdrawal request submitted, please wait for admin confirmation");
     }
 }

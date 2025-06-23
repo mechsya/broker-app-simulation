@@ -26,7 +26,7 @@ class TradeController extends Controller
     {
         $id = Cookie::get('id');
         $user = User::with('profile')->find($id);
-        $balance = $user->profile[0]->balance;
+        $balance = $user->profile->balance;
 
         // Check if the user's balance is sufficient
         if ($balance == 0 || $balance < $request->amount) {
@@ -35,7 +35,7 @@ class TradeController extends Controller
         }
 
         // Update user balance
-        $profile = Profile::find($user->profile[0]->id);
+        $profile = Profile::find($user->profile->id);
         $profile->balance = $balance - $request->amount;
         $profile->save();
 

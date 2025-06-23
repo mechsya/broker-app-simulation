@@ -42,7 +42,7 @@
             </div>
 
             <div class="mt-6">
-                <table class="w-full table-border">
+                <table id="container-table" class="w-full table-border">
                     <thead class="bg-[#C8C8C8] text-black font-medium">
                         <tr class="table-border">
                             <td class="table-border">#</td>

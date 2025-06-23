@@ -20,7 +20,7 @@
                     <li>Image file size must not exceed 1 MB.</li>
                 </ul>
                 <div src="" class="w-28 mt-6 h-28 bg-background bg-cover"
-                    style="background-image: url({{ asset('') }}storage/photo-profile/{{ $user->profile[0]->photoProfile }});">
+                    style="background-image: url({{ asset('') }}storage/photo-profile/{{ $user->profile->photoProfile }});">
                 </div>
                 <form enctype="multipart/form-data" method="POST" action="{{ route('setting.image.update') }}"
                     class=" mt-6">

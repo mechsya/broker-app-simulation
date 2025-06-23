@@ -27,7 +27,7 @@
                                     'label' => 'Purchase Amount',
                                     'name' => 'amount',
                                     'readonly' => true,
-                                    'value' => "UEA $balance->amount",
+                                    'value' => "AED $balance->amount",
                                 ])
 
                                 <div>
@@ -71,10 +71,8 @@
                 </div>
 
                 <div class="p-4 lg:p-6 overflow-x-scroll">
-                    @include('components.print')
-
                     <div class="w-[900px] lg:w-auto">
-                        <table class="w-full table-border">
+                        <table id="container-table" class="w-full table-border">
                             <thead>
                                 <tr class="table-border">
                                     <td class="table-border">Date</td>

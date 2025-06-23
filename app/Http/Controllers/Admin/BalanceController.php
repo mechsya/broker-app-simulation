@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\WithdrawMail;
 use App\Models\Balance;
 use App\Models\Profile;
+use App\Models\User;
 use App\Models\Withdraw;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class BalanceController extends Controller
 {
@@ -63,15 +66,35 @@ class BalanceController extends Controller
             return back()->with('error', 'Withdrawal request not found');
         }
 
-        $profile = Profile::where('user_id', $withdraw->user_id)->first();
+        $user = User::with('profile')->where('id', $withdraw->user_id)->first();
 
         if ($request->method === 'reject') {
-            if ($profile) {
-                $profile->increment('balance', $withdraw->amount);
+            if ($user) {
+                $user->profile->increment('balance', $withdraw->amount);
+
+                $withdraw->update(['status' => 'reject', 'reason_reject' => $request->reason_reject]);
+
+                Mail::to('alinia.meysa@gmail.com')->send(new WithdrawMail([
+                    'subject' => 'Your Withdrawal Request Has Been Rejected',
+                    'type' => 'reject',
+                    'message' => $request->reason_reject,
+                    'withdraw' => 0,
+                    'name' => $user->name
+                ]));
+
+                return;
             }
         }
 
-        $withdraw->update(['status' => $request->method, 'reason_reject' => $request->reason_reject]);
+        $withdraw->update(['status' => 'success', 'reason_reject' => $request->reason_reject]);
+
+        Mail::to('alinia.meysa@gmail.com')->send(new WithdrawMail([
+            'subject' => 'Your Withdrawal Request Has Been Approve',
+            'type' => 'success',
+            'message' => $request->reason_reject,
+            'withdraw' => $withdraw->amount,
+            'name' => $user->name
+        ]));
 
         return back()->with('success', ucfirst($request->method) . ' success');
     }

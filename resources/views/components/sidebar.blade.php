@@ -4,7 +4,7 @@
         <p class="text-orange font-xl text-center mb-1"><span class="font-semibold">Welcome</span> User</p>
         <div class="w-20 h-20 rounded-full flex justify-center items-center border border-background">
             <div class="bg-cover w-16 h-16 rounded-full bg-background"
-                style="background-image: url({{ asset('') }}storage/photo-profile/{{ @$user->profile[0]->photoProfile }});">
+                style="background-image: url({{ asset('') }}storage/photo-profile/{{ @$user->profile->photoProfile }});">
             </div>
         </div>
         <p class="text-center mt-4 opacity-60 text-sm">{{ @$user->name }}<br />({{ @$user->username }})</p>

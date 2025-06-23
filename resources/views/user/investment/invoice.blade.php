@@ -42,7 +42,7 @@
             </div>
 
             <div class="mt-6">
-                <table class="w-full table-border">
+                <table id="container-table" class="w-full table-border">
                     <thead class="bg-[#C8C8C8] text-black font-medium">
                         <tr class="table-border">
                             <td class="table-border">#</td>
@@ -102,9 +102,9 @@
                                 'name' => 'amount',
                                 'readonly' => true,
                                 'value' =>
-                                    $user->profile[0]->balance == '0.00'
+                                    $user->profile->balance == '0.00'
                                         ? 'No Balance Available'
-                                        : 'UEA ' . $user->profile[0]->balance,
+                                        : 'AED ' . $user->profile->balance,
                             ])
                             <a href="{{ route('investment.confirmation', ['id' => $investment->id, 'balance' => '']) }}"
                                 class="p-2 bg-orange rounded text-white font-semibold">Pay Now</a>

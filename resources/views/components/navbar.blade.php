@@ -12,10 +12,10 @@
         <div class="flex items-center">
             <div class="text-white mr-4 flex gap-2 items-center rounded bg-[#3E3E3E] p-1 px-2">
                 @if ($user->status != 'actived')
-                    @money($user->profile[0]->balanceFree)
+                    @money($user->profile->balanceFree)
                     <span class="rounded bg-red-500 px-2 text-white">Free</span>
                 @else
-                    @money($user->profile[0]->balance)
+                    @money($user->profile->balance)
                     <span class="rounded bg-green px-2 text-black">Real</span>
                 @endif
             </div>
@@ -38,7 +38,7 @@
             </div>
             <div class="h-16 w-16 flex items-center justify-center hover:bg-[#E58900]" x-on:click="profile = !profile">
                 <div class="bg-cover h-8 w-8 lg:w-10 lg:h-10 rounded-full bg-background"
-                    style="background-image: url({{ asset('') }}storage/photo-profile/{{ $user->profile[0]->photoProfile }});">
+                    style="background-image: url({{ asset('') }}storage/photo-profile/{{ $user->profile->photoProfile }});">
                 </div>
             </div>
         </div>
@@ -49,7 +49,7 @@
         x-bind:class="profile ? 'p-3 block' : 'h-0 hidden'">
         <div class="flex gap-4 items-center border-b border-white/30 pb-4">
             <div class="bg-cover h-16 w-16 rounded-full bg-background"
-                style="background-image: url({{ asset('') }}storage/photo-profile/{{ $user->profile[0]->photoProfile }});">
+                style="background-image: url({{ asset('') }}storage/photo-profile/{{ $user->profile->photoProfile }});">
             </div>
             <div>
                 <p class="text-lg text-white/70">{{ $user->username }}</p>

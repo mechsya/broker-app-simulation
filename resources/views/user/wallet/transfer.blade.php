@@ -19,7 +19,7 @@
                             @csrf
                             <div class="mb-4">
                                 @include('components.input-icon', [
-                                    'icon' => 'UEA',
+                                    'icon' => 'AED',
                                     'label' => 'Transfer Amount',
                                     'name' => 'amount',
                                     'type' => 'tel',
@@ -55,10 +55,10 @@
                 </div>
 
                 <div class="p-4 lg:p-6 overflow-x-scroll">
-                    @include('components.print')
+                    @include('components.print', ['model' => 'transfer-history'])
 
                     <div class="w-[900px] lg:w-auto">
-                        <table class="w-full table-border">
+                        <table id="container-table" class="w-full table-border">
                             <thead>
                                 <tr class="table-border">
                                     <td class="table-border">Date</td>
@@ -79,7 +79,7 @@
                                     @endforeach
                                 @else
                                     <tr class="table-border">
-                                        <td class="p-4">No data available in the table</td>
+                                        <td class="p-4" colspan="4">No data available in the table</td>
                                     </tr>
                                 @endif
                             </tbody>

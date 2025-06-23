@@ -19,7 +19,10 @@ class AuthController extends Controller
     {
         $request->merge(['password' => Hash::make($request->password)]);
 
-        $user = User::firstOrCreate(['email' => $request->email, 'username' => $request->username], $request->all());
+        $user = User::firstOrCreate(
+            ['email' => $request->email, 'username' => $request->username],
+            $request->all()
+        );
 
         if ($request->invitedBy != "") {
             Refferal::create([
@@ -30,9 +33,9 @@ class AuthController extends Controller
 
         if ($user->wasRecentlyCreated) {
             Profile::create(['user_id' => $user->id]);
-            return back()->with('success', 'Pendaftaran berhasil');
+            return back()->with('success', 'Registration successful');
         } else {
-            return back()->with('error', 'Pengguna sudah ada');
+            return back()->with('error', 'User already exists');
         }
     }
 
@@ -45,21 +48,22 @@ class AuthController extends Controller
                 Session::put('id', $user->id);
                 return redirect('/')->cookie(Cookie::make('id', $user->id, 1440));
             } else {
-                return back()->with('error', 'Kredensial tidak valid');
+                return back()->with('error', 'Invalid credentials');
             }
         } else {
-            return back()->with('error', 'Pengguna tidak terdaftar');
+            return back()->with('error', 'User not registered');
         }
     }
 
     public function forget(Request $request)
     {
         $user = User::where('email', $request->email)->first();
-        if ($user->username == $request->username) {
+
+        if ($user && $user->username == $request->username) {
             Mail::to($user->email)->send(new ForgetEmail($user->name, $user->email));
-            return back()->with('success', 'Kami telah mengirimkan email konfirmasi ke kotak masuk Anda, silakan lihat dan reset kata sandi Anda');
+            return back()->with('success', 'We have sent a confirmation email to your inbox. Please check it and reset your password.');
         } else {
-            return back()->with('error', 'Pengguna tidak ditemukan');
+            return back()->with('error', 'User not found');
         }
     }
 
@@ -68,16 +72,16 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)->first();
         $password = $request->all();
 
-        if ($password['newPassword'] == $password['confirmPassword']) {
+        if ($password['newPassword'] === $password['confirmPassword']) {
             if (Hash::check($password['currentPassword'], $user->password)) {
                 $user->password = Hash::make($password['newPassword']);
                 $user->save();
-                return redirect()->to(route('auth.signin'))->with('success', 'Kata sandi berhasil diubah');
+                return redirect()->to(route('auth.signin'))->with('success', 'Password changed successfully');
             } else {
-                return back()->with('error', 'Kata sandi saat ini salah');
+                return back()->with('error', 'Current password is incorrect');
             }
         } else {
-            return back()->with('error', 'Konfirmasi kata sandi tidak cocok');
+            return back()->with('error', 'Password confirmation does not match');
         }
     }
 }

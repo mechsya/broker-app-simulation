@@ -14,7 +14,7 @@
 
             <div class="p-4 lg:p-6 overflow-x-scroll">
                 <div class="w-[900px] lg:w-auto">
-                    <table class="w-full table-border">
+                    <table id="container-table" class="w-full table-border">
                         <thead>
                             <tr class="table-border">
                                 <td class="table-border">Foto Profil</td>
@@ -60,7 +60,7 @@
                                 @endforeach
                             @else
                                 <tr class="table-border">
-                                    <td class="p-4">Tidak ada data tersedia di tabel</td>
+                                    <td class="p-4" colspan="5">Tidak ada data tersedia di tabel</td>
                                 </tr>
                             @endif
                         </tbody>

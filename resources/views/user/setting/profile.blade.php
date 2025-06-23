@@ -38,7 +38,7 @@
                     @include('components.input', [
                         'label' => 'Address',
                         'name' => 'profile[address]',
-                        'value' => $user->profile[0]->address,
+                        'value' => $user->profile->address,
                     ])
 
                     @include('components.input', [
@@ -67,22 +67,22 @@
                     @include('components.input', [
                         'label' => 'Bitcoin Address',
                         'name' => 'profile[bitcoinAddress]',
-                        'value' => $user->profile[0]->bitcoinAddress,
+                        'value' => $user->profile->bitcoinAddress,
                     ])
 
                     @include('components.input', [
                         'label' => 'Bank Name',
                         'name' => 'profile[bank]',
-                        'value' => $user->profile[0]->bank,
+                        'value' => $user->profile->bank,
                     ])
 
                     <label class="text-white/70" for="email">Notification Login</label><br />
                     <select name="profile[notificationLogin]"
                         class="bg-background outline-none p-3 mb-2 border border-white/30 w-full mt-2 rounded-lg h-[50px]">
-                        <option value="1" {{ $user->profile[0]->notificationLogin == 1 ? 'selected' : '' }}>
+                        <option value="1" {{ $user->profile->notificationLogin == 1 ? 'selected' : '' }}>
                             Send it to me when logged in
                         </option>
-                        <option value="0" {{ $user->profile[0]->notificationLogin == 0 ? 'selected' : '' }}>
+                        <option value="0" {{ $user->profile->notificationLogin == 0 ? 'selected' : '' }}>
                             Dont send it to me when logged in
                         </option>
                     </select>

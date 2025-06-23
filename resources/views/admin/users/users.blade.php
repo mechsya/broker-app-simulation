@@ -13,10 +13,8 @@
             </div>
 
             <div class="p-4 lg:p-6 overflow-x-scroll">
-                @include('components.print')
-
                 <div class="w-[900px] lg:w-auto">
-                    <table class="w-full table-border">
+                    <table id="container-table" class="w-full table-border">
                         <thead>
                             <tr class="table-border">
                                 <td class="table-border">Foto Profil</td>
@@ -32,7 +30,7 @@
                                     <tr class="table-border">
                                         <td class="table-border">
                                             <img loading="lazy"
-                                                src="{{ asset('') }}storage/photo-profile/{{ @$user->profile[0]->photoProfile ?? 'default.jpg' }}"
+                                                src="{{ asset('') }}storage/photo-profile/{{ @$user->profile->photoProfile ?? 'default.jpg' }}"
                                                 width="55" class="m-auto" />
                                         </td>
                                         <td class="table-border">{{ $user->name }}</td>

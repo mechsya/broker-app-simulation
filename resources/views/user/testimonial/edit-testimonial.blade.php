@@ -50,10 +50,8 @@
                 </div>
 
                 <div class="p-4 lg:p-6 overflow-x-scroll">
-                    @include('components.print')
-
                     <div class="w-[900px] lg:w-auto">
-                        <table class="w-full table-border">
+                        <table id="container-table" class="w-full table-border">
                             <thead>
                                 <tr class="table-border">
                                     <td class="table-border">Date</td>
@@ -82,14 +80,13 @@
                                             <td class="table-border">{{ $testimoni->title }}</td>
                                             <td class="table-border">
                                                 <div class="flex justify-center" id="view-button">
-                                                    <img src="https://hsbglobaltrade.com/images/view.png" />
+                                                    <i class="bi bi-eye"></i>
                                                 </div>
                                             </td>
                                             <td class="table-border">
                                                 <a href="{{ route('testimonial.edit', ['id' => $testimoni->id]) }}"
                                                     class="flex justify-center">
-                                                    <img src="https://hsbglobaltrade.com/images/edit_f2.png"
-                                                        class="h-6" />
+                                                    <i class="bi bi-pencil-fill"></i>
                                                 </a>
                                             </td>
                                             <td class="table-border">
@@ -100,7 +97,7 @@
                                     @endforeach
                                 @else
                                     <tr class="table-border">
-                                        <td class="p-4">No data in table</td>
+                                        <td class="p-4" colspan="5">No data in table</td>
                                     </tr>
                                 @endif
                             </tbody>

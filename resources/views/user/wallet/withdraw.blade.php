@@ -19,7 +19,7 @@
                             @csrf
                             <div class="mb-4">
                                 @include('components.input-icon', [
-                                    'icon' => 'UEA',
+                                    'icon' => 'AED',
                                     'label' => 'Withdrawal Amount',
                                     'name' => 'amount',
                                     'required' => true,
@@ -78,17 +78,17 @@
                 </div>
 
                 <div class="p-4 lg:p-6 overflow-x-scroll">
-                    @include('components.print')
+                    @include('components.print', ['model' => 'withdraw'])
 
                     <div class="w-[900px] lg:w-auto">
-                        <table class="w-full table-border">
+                        <table id="container-table" class="w-full table-border">
                             <thead>
                                 <tr class="table-border">
                                     <td class="table-border">Date</td>
                                     <td class="table-border">Amount</td>
                                     <td class="table-border">Fee</td>
                                     <td class="table-border">Node</td>
-                                    <td class="table-border">Reason Rejected</td>
+                                    <td class="table-border">Reason</td>
                                     <td class="table-border">Status</td>
                                 </tr>
                             </thead>
@@ -100,7 +100,8 @@
                                             <td class="table-border">@money($withdraw->amount)</td>
                                             <td class="table-border">@money($withdraw->fee)</td>
                                             <td class="table-border">{{ $withdraw->note }}</td>
-                                            <td class="table-border">{{ $withdraw->reason_reject }}</td>
+                                            <td class="table-border">
+                                                {{ $withdraw->reason_reject ? $withdraw->reason_reject : '-' }}</td>
                                             <td class="table-border">
                                                 @php
                                                     $statusClass = match ($withdraw->status) {
@@ -119,7 +120,7 @@
                                     @endforeach
                                 @else
                                     <tr class="table-border">
-                                        <td class="p-4">No data available in the table</td>
+                                        <td class="p-4" colspan="6">No data available in the table</td>
                                     </tr>
                                 @endif
                             </tbody>

@@ -14,7 +14,7 @@
 
             <div class="p-4 lg:p-6 overflow-x-scroll">
                 <div class="w-[900px] lg:w-auto">
-                    <table class="w-full table-border">
+                    <table id="container-table" class="w-full table-border">
                         <thead>
                             <tr class="table-border">
                                 <td class="table-border w-[20%]">Date</td>
@@ -48,7 +48,7 @@
                                 @endforeach
                             @else
                                 <tr class="table-border">
-                                    <td class="p-4">No data in table</td>
+                                    <td class="p-4" colspan="3">No data in table</td>
                                 </tr>
                             @endif
                         </tbody>

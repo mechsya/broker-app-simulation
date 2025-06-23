@@ -134,7 +134,7 @@
 
                         @include('components.input-icon', [
                             'label' => 'Saldo Saat Ini',
-                            'icon' => 'UEA',
+                            'icon' => 'AED',
                             'readonly' => true,
                             'name' => 'currentBalance',
                             'value' => @$usera->profile[0]->balance,
@@ -143,7 +143,7 @@
                         <div class="mt-4">
                             @include('components.input-icon', [
                                 'label' => 'Tambah Saldo',
-                                'icon' => 'UEA',
+                                'icon' => 'AED',
                                 'name' => 'balance',
                             ])
                         </div>
