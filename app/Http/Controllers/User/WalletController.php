@@ -109,7 +109,7 @@ class WalletController extends Controller
     public function transferStore(Request $request)
     {
         $user = User::with('profile')->where('id', Cookie::get('id'))->first();
-        if ($user->profile->profile[0]->balance <= $request->amount) {
+        if ($user->profile->balance <= $request->amount) {
             return back()->with('error', 'Your balance is insufficient');
         }
 
@@ -119,19 +119,19 @@ class WalletController extends Controller
         }
 
         $transfer = Transfer::create([
-            'sender' =>  $user->profile->id,
+            'sender' =>  $user->id,
             'recipient' => $checkUser->id,
             'amount' => $request->amount,
             'note' => $request->note
         ]);
 
         if ($transfer) {
-            Profile::where('user_id', $user->profile->id)->update([
-                'balance' => $user->profile->profile[0]->balance - $transfer->amount
+            Profile::where('user_id', $user->id)->update([
+                'balance' => $user->profile->balance - $transfer->amount
             ]);
 
             Profile::where('user_id', $checkUser->id)->update([
-                'balance' => $checkUser->profile[0]->balance + $transfer->amount
+                'balance' => $checkUser->profile->balance + $transfer->amount
             ]);
 
             Notification::create('Transfer Successful', "Your transfer of AED $request->amount to $checkUser->name was successful");
@@ -167,7 +167,7 @@ class WalletController extends Controller
             Withdraw::create($request->all());
             Notification::create('Withdrawal in Process', "Your withdrawal request of AED $request->amount is being processed");
 
-            Mail::to('alinia.meysa@gmail.com')->send(new WithdrawMail([
+            Mail::to($user->email)->send(new WithdrawMail([
                 'subject' => 'Withdrawal Request Received',
                 'type' => 'request',
                 'message' => "We have received your withdrawal request of AED " . number_format($request->amount, 2) . " Our team is currently processing your request.",

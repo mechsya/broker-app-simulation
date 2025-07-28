@@ -24,6 +24,8 @@ Route::prefix('dashboard')->group(function () {
 
         Route::put('{id}/verification', [UserController::class, 'update'])->name('dashboard.users.update');
 
+        Route::post('{id}/add-profit', [UserController::class, 'addProfit'])->name('dashboard.users.create.profit');
+
         Route::put('{id}/add-balance', [UserController::class, 'putBalance'])->name('dashboard.users.update.balance');
 
         Route::get('request', [UserController::class, 'requestUser'])->name('dashboard.users.request');

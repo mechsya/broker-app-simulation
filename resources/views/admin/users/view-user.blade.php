@@ -16,7 +16,7 @@
                 <div class="text-white p-6">
                     <label class="text-white/70">Foto Profil</label>
                     <div class="bg-cover w-32 mb-4 mt-4 h-32 bg-background"
-                        style="background-image: url({{ asset('') }}storage/photo-profile/{{ @$usera->profile[0]->photoProfile }});">
+                        style="background-image: url({{ asset('') }}storage/photo-profile/{{ @$usera->profile->photoProfile }});">
                     </div>
 
                     <div class="my-4">
@@ -52,7 +52,7 @@
                         @include('components.input', [
                             'label' => 'Alamat',
                             'name' => 'profile[address]',
-                            'value' => @$usera->profile[0]->address,
+                            'value' => @$usera->profile->address,
                         ])
 
                         @include('components.input', [
@@ -76,22 +76,22 @@
                         @include('components.input', [
                             'label' => 'Alamat Bitcoin',
                             'name' => 'profile[bitcoinAddress]',
-                            'value' => @$usera->profile[0]->bitcoinAddress,
+                            'value' => @$usera->profile->bitcoinAddress,
                         ])
 
                         @include('components.input', [
                             'label' => 'Bank',
                             'name' => 'profile[bank]',
-                            'value' => @$usera->profile[0]->bank,
+                            'value' => @$usera->bank,
                         ])
 
                         <label class="text-white/70" for="email">Notifikasi Login</label><br />
                         <select name="profile[notificationLogin]"
                             class="bg-background outline-none p-3 mb-2 border border-white/30 w-full mt-2 rounded-lg h-[50px]">
-                            <option value="1" {{ @$usera->profile[0]->notificationLogin == 1 ? 'selected' : '' }}>
+                            <option value="1" {{ @$usera->profile->notificationLogin == 1 ? 'selected' : '' }}>
                                 Kirim Email saat Login
                             </option>
-                            <option value="0" {{ @$usera->profile[0]->notificationLogin == 0 ? 'selected' : '' }}>
+                            <option value="0" {{ @$usera->profile->notificationLogin == 0 ? 'selected' : '' }}>
                                 Jangan Kirim Email saat Login
                             </option>
                         </select>
@@ -137,7 +137,7 @@
                             'icon' => 'AED',
                             'readonly' => true,
                             'name' => 'currentBalance',
-                            'value' => @$usera->profile[0]->balance,
+                            'value' => @$usera->profile->balance,
                         ])
 
                         <div class="mt-4">
@@ -152,6 +152,20 @@
                             Saldo</button>
                     </form>
                 </div>
+
+                <div class="text-white px-6 py-4">
+                    <form method="POST" action="{{ route('dashboard.users.create.profit', ['id' => $usera->id]) }}">
+                        @csrf
+                        @include('components.input-icon', [
+                            'label' => 'Jumlah Profit',
+                            'icon' => 'AED',
+                            'name' => 'amount',
+                        ])
+
+                        <button id="button-password" class="bg-orange p-3 rounded-lg w-full text-black mt-4">Tambah
+                            Profit</button>
+                    </form>
+                </div>
             </div>
         </div>
 
@@ -163,7 +177,7 @@
 
                 <div class="text-white/70 p-6" x-ref="changePasswordContainer">
                     <div class="mb-4">
-                        @if (!@$usera->profile[0]->identityCard)
+                        @if (!@$usera->profile->identityCard)
                             <div class="relative rounded-lg overflow-hidden p-4 text-center">
                                 <div class="flex justify-center flex-col items-center ">
                                     <img src="{{ asset('') }}images/unverified.png" alt="unverified"
@@ -173,7 +187,7 @@
                             </div>
                         @else
                             <img class="w-full  rounded"
-                                src="{{ asset('') }}storage/identity-card/{{ $usera->profile[0]->identityCard }}" />
+                                src="{{ asset('') }}storage/identity-card/{{ $usera->profile->identityCard }}" />
                         @endif
                     </div>
                 </div>
@@ -185,7 +199,7 @@
                 </div>
                 <div class="text-white/70 p-6" x-ref="changePasswordContainer">
                     <div>
-                        @if (!@$usera->profile[0]->closeUpPhoto)
+                        @if (!@$usera->profile->closeUpPhoto)
                             <div class="relative rounded-lg overflow-hidden p-4 text-center">
                                 <div class="flex justify-center flex-col items-center ">
                                     <img src="{{ asset('') }}images/unverified.png" alt="unverified"
@@ -194,7 +208,7 @@
                                 </div>
                             </div>
                         @else
-                            <img src="{{ asset('') }}storage/close-up/{{ @$usera->profile[0]->closeUpPhoto }}"
+                            <img src="{{ asset('') }}storage/close-up/{{ @$usera->profile->closeUpPhoto }}"
                                 class="w-full rounded" />
                         @endif
                     </div>

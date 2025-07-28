@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Investment;
+use App\Models\Profit;
 use App\Models\Trade;
 use Illuminate\Support\Facades\Cookie;
 
@@ -16,16 +17,14 @@ class FundController extends Controller
 
     public function profits()
     {
-        $profitInvests = Investment::with('package')
-            ->where('user_id', Cookie::get('id'))
-            ->where('expiresAt', ">=", now())
+        $profits = Profit::where('user_id', Cookie::get('id'))
             ->get();
 
-        $totalProfit = Investment::where('user_id', Cookie::get('id'))->sum('profit');
+        $totalProfit = Profit::where('user_id', Cookie::get('id'))->sum('amount');
 
         return view('user.fund.profits', [
             'page' => 'fund',
-            'profitInvests' => $profitInvests,
+            'profits' => $profits,
             'totalProfit' => $totalProfit
         ]);
     }

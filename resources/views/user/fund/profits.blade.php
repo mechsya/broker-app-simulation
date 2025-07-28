@@ -20,19 +20,15 @@
                         <thead>
                             <tr class="table-border">
                                 <td class="table-border w-[25%]">Date</td>
-                                <td class="table-border w-[25%]">Deposit Code</td>
-                                <td class="table-border w-[25%]">Type</td>
                                 <td class="table-border w-[25%]">Amount</td>
                             </tr>
                         </thead>
                         <tbody>
-                            @if (count($profitInvests) != 0)
-                                @foreach ($profitInvests as $profit)
+                            @if (count($profits) != 0)
+                                @foreach ($profits as $profit)
                                     <tr class="table-border">
                                         <td class="table-border">{{ $profit->created_at }}</td>
-                                        <td class="table-border">{{ $profit->code }}</td>
-                                        <td class="table-border">Package {{ $profit->package->name }}</td>
-                                        <td class="table-border">@money($profit->profit)</td>
+                                        <td class="table-border">@money($profit->amount)</td>
                                     </tr>
                                 @endforeach
                             @else

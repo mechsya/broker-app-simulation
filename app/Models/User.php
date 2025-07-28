@@ -71,6 +71,11 @@ class User extends Authenticatable
         return $this->hasMany(Testimoni::class);
     }
 
+    public function profit()
+    {
+        return $this->hasMany(Profit::class);
+    }
+
     public function investment()
     {
         return $this->hasMany(Investment::class);

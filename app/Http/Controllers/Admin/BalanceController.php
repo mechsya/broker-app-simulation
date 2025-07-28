@@ -74,7 +74,7 @@ class BalanceController extends Controller
 
                 $withdraw->update(['status' => 'reject', 'reason_reject' => $request->reason_reject]);
 
-                Mail::to('alinia.meysa@gmail.com')->send(new WithdrawMail([
+            Mail::to($user->email)->send(new WithdrawMail([
                     'subject' => 'Your Withdrawal Request Has Been Rejected',
                     'type' => 'reject',
                     'message' => $request->reason_reject,
@@ -82,13 +82,14 @@ class BalanceController extends Controller
                     'name' => $user->name
                 ]));
 
-                return;
+
+            return back()->with('success', ucfirst($request->method) . ' success');
             }
         }
 
         $withdraw->update(['status' => 'success', 'reason_reject' => $request->reason_reject]);
 
-        Mail::to('alinia.meysa@gmail.com')->send(new WithdrawMail([
+        Mail::to($user->email)->send(new WithdrawMail([
             'subject' => 'Your Withdrawal Request Has Been Approve',
             'type' => 'success',
             'message' => $request->reason_reject,

@@ -57,7 +57,7 @@
                     <div class="flex items-center">
                         <div
                             class="bg-background outline-none p-3 mb-2 border border-white/30 rounded-l-lg border-r-0 h-[46px]">
-                            🇮🇩
+                            🇦🇪
                         </div>
                         <input type="tel" value="{{ $user->numberPhone }}" id="phone" name="phone"
                             class="text-white/50 w-full mt-2 border border-white/30 outline-none rounded-r-lg p-3 bg-black mb-4"

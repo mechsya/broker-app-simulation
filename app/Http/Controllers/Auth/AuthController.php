@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Mail\ForgetEmail;
+use App\Mail\WithdrawMail;
 use App\Models\Profile;
 use App\Models\Refferal;
 use App\Models\User;
@@ -33,6 +34,15 @@ class AuthController extends Controller
 
         if ($user->wasRecentlyCreated) {
             Profile::create(['user_id' => $user->id]);
+
+            Mail::to($user->email)->send(new WithdrawMail([
+                'subject' => 'Welcome To ' . env("APP_NAME"),
+                'type' => 'signup',
+                'message' => "We have received your withdrawal request of AED " . number_format($request->amount, 2) . " Our team is currently processing your request.",
+                'withdraw' => 0,
+                'name' => $user->name
+            ]));
+
             return back()->with('success', 'Registration successful');
         } else {
             return back()->with('error', 'User already exists');

@@ -18,6 +18,15 @@
     <div style="padding: 20px; color: #333333; line-height: 1.6;">
         <p>Dear {{ $name }},</p>
 
+        @if ($type === 'signup')
+            <p>Thanks for signing up!
+                We're excited to have you with us.
+
+                You can now start exploring all the features of {{ env('APP_NAME') }}.
+                If you need any help, feel free to reach out!
+            </p>
+        @endif
+
         @if ($type === 'reject')
             <p>We regret to inform you that your recent withdrawal request has been <strong>rejected</strong> by our
                 team.</p>

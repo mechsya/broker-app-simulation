@@ -152,7 +152,7 @@
                                             <option value="HU">Hungary</option>
                                             <option value="IS">Iceland</option>
                                             <option value="IN">India</option>
-                                            <option value="ID" selected>Indonesia</option>
+                                            <option value="ID">Indonesia</option>
                                             <option value="IA">Iran</option>
                                             <option value="IQ">Iraq</option>
                                             <option value="IR">Ireland</option>
@@ -282,7 +282,7 @@
                                             <option value="TV">Tuvalu</option>
                                             <option value="UG">Uganda</option>
                                             <option value="UA">Ukraine</option>
-                                            <option value="AE">United Arab Emirates</option>
+                                            <option value="AE" selected>United Arab Emirates</option>
                                             <option value="GB">United Kingdom</option>
                                             <option value="US">United States of America</option>
                                             <option value="UY">Uruguay</option>
