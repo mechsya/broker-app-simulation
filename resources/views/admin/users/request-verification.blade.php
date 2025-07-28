@@ -29,8 +29,7 @@
                                 @foreach ($usera as $key => $usera)
                                     <tr class="table-border">
                                         <td class="table-border">
-                                   
-                                            <img src="{{ asset('') }}storage/photo-profile/{{ $usera->profile[0]->photoProfile ?? 'default.jpg' }}"
+                                            <img src="{{ asset('') }}storage/photo-profile/{{ $usera->profile->photoProfile ?? 'default.jpg' }}"
                                                 width="55" class="m-auto" />
                                         </td>
                                         <td class="table-border">{{ $usera->name }}</td>
