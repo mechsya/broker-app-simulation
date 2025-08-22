@@ -161,7 +161,7 @@
                                             <option value="IT">Italy</option>
                                             <option value="JM">Jamaica</option>
                                             <option value="JP">Japan</option>
-                                            <option value="JO">Jordan</option>
+                                            <option value="JO" selected>Jordan</option>
                                             <option value="KZ">Kazakhstan</option>
                                             <option value="KE">Kenya</option>
                                             <option value="KI">Kiribati</option>
@@ -282,7 +282,7 @@
                                             <option value="TV">Tuvalu</option>
                                             <option value="UG">Uganda</option>
                                             <option value="UA">Ukraine</option>
-                                            <option value="AE" selected>United Arab Emirates</option>
+                                            <option value="AE">United Arab Emirates</option>
                                             <option value="GB">United Kingdom</option>
                                             <option value="US">United States of America</option>
                                             <option value="UY">Uruguay</option>

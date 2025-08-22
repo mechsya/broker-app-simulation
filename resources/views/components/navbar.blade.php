@@ -11,12 +11,21 @@
         </div>
         <div class="flex items-center">
             <div class="text-white mr-4 flex gap-2 items-center rounded bg-[#3E3E3E] p-1 px-2">
+                @money($user->profile->balance)
                 @if ($user->status != 'actived')
-                    @money($user->profile->balanceFree)
-                    <span class="rounded bg-red-500 px-2 text-white">Free</span>
+                    <div
+                        style="width: 50px; height: 20px; background-color: red; border-radius: 20px; display: flex; justify-content:space-between; flex-direction: row-reverse; align-items:center; padding: 0px 6px;">
+                        <p style="font-size: 14px; font-weight: medium;">OFF</p>
+                        <div style="height: 10px; width: 10px; background-color: white; border-radius: 50%;">
+                        </div>
+                    </div>
                 @else
-                    @money($user->profile->balance)
-                    <span class="rounded bg-green px-2 text-black">Real</span>
+                    <div
+                        style="width: 50px; height: 20px; background-color: #16a34a; border-radius: 20px; display: flex; justify-content:space-between; flex-direction: row; align-items:center; padding: 0px 6px;">
+                        <p style="font-size: 14px; font-weight: medium;">ON</p>
+                        <div style="height: 10px; width: 10px; background-color: white; border-radius: 50%;">
+                        </div>
+                    </div>
                 @endif
             </div>
             <div class="h-16 w-12 hidden lg:flex items-center justify-center hover:bg-[#E58900] text-white">
